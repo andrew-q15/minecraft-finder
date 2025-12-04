@@ -10,4 +10,4 @@ repos:
     hooks:
     -   id: mypy
         files: ^(src|tests)/
-        additional_dependencies: [pandas-stubs]
+        additional_dependencies: [pandas-stubs, types-requests]

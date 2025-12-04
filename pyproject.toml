@@ -18,6 +18,7 @@ requires-python = ">=3.11"
 dependencies = [
     "pandas",
     "matplotlib",
+    "requests",
 ]
 
 [project.optional-dependencies]
@@ -27,6 +28,7 @@ dev = [
     "mypy",
     "pre-commit",
     "pandas-stubs",
+    "types-requests",
 ]
 
 [tool.ruff]
