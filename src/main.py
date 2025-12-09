@@ -1,4 +1,4 @@
-import requests
+from .search import searchFromWiki
 
 
 def main() -> None:
@@ -7,13 +7,12 @@ def main() -> None:
         if query == "over":
             print("谢谢使用,正在结束...")
             break
+
         print(f"正在查询: {query} ...")
         print("================================================================")
-        response = requests.get(
-            f"https://minecraft.wiki/rest.php/v1/search/page?format=json&limit=5&q={query}"
-        )
-        data = response.json()
-        dataList = data.get("pages", [])
+
+        dataList = searchFromWiki(query)
+
         for item in dataList:
             print("%-10s %s" % (item.get("id", ""), item.get("title", "")))
             print("____________________________________________________________")
