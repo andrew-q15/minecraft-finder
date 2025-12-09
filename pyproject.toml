@@ -29,6 +29,7 @@ dev = [
     "pre-commit",
     "pandas-stubs",
     "types-requests",
+    "pyinstaller",
 ]
 
 [tool.ruff]

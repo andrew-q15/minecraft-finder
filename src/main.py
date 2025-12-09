@@ -1,4 +1,4 @@
-from .search import searchFromWiki
+from search import searchFromWiki
 
 
 def main() -> None:
