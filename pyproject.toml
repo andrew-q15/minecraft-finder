@@ -19,6 +19,7 @@ dependencies = [
     "pandas",
     "matplotlib",
     "requests",
+    "argparse",
 ]
 
 [project.optional-dependencies]
