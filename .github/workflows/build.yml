@@ -37,7 +37,7 @@ jobs:
       with:
         name: main-binary
     - name: Make artifact executable
-      run: chmod +x main-binary/main
+      run: chmod +x main-binary/dist/main
     - name: Create GitHub Release
       id: create_release
       uses: actions/create-release@v1
