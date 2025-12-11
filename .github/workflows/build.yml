@@ -38,7 +38,7 @@ jobs:
         name: main-binary
     - run: ls -R .
     - name: Make artifact executable
-      run: chmod +x main-binary/main
+      run: chmod +x main
     - name: Create GitHub Release
       id: create_release
       uses: actions/create-release@v1
@@ -56,6 +56,6 @@ jobs:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       with:
         upload_url: ${{ steps.create_release.outputs.upload_url }}
-        asset_path: main-binary/main
+        asset_path: main
         asset_name: main
         asset_content_type: application/octet-stream
