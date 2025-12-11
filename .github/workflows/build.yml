@@ -23,7 +23,7 @@ jobs:
     - name: Build
       run: PYTHONPATH=src pyinstaller --onefile src/main.py
     - name: Upload Build Artifact
-      uses: actions/upload-artifact@v3
+      uses: actions/upload-artifact@v4
       with:
         name: main-binary
         path: dist/main
@@ -33,7 +33,7 @@ jobs:
     steps:
     - uses: actions/checkout@v3
     - name: Download Build Artifact
-      uses: actions/download-artifact@v3
+      uses: actions/download-artifact@v4
       with:
         name: main-binary
     - name: Make artifact executable
