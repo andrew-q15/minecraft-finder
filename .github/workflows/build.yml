@@ -36,6 +36,7 @@ jobs:
       uses: actions/download-artifact@v4
       with:
         name: main-binary
+        path: dist/main
     - name: Make artifact executable
       run: chmod +x main-binary/dist/main
     - name: Create GitHub Release
