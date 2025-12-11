@@ -6,7 +6,7 @@ on:
     - main
 
 jobs:
-  lint:
+  build:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v3
@@ -20,3 +20,41 @@ jobs:
         pip install ".[dev]"
     - name: Test and Lint
       run: pre-commit run --all-files
+    - name: Build
+      run: PYTHONPATH=src pyinstaller --onefile src/main.py
+    - name: Upload Build Artifact
+      uses: actions/upload-artifact@v3
+      with:
+        name: main-binary
+        path: dist/main
+  release:
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v3
+    - name: Download Build Artifact
+      uses: actions/download-artifact@v3
+      with:
+        name: main-binary
+    - name: Make artifact executable
+      run: chmod +x main-binary/main
+    - name: Create GitHub Release
+      id: create_release
+      uses: actions/create-release@v1
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        tag_name: v${{ github.run_number }}-${{ github.sha }}
+        release_name: Build ${{ github.run_number }}
+        body: Automated build for commit ${{ github.sha }}
+        draft: false
+        prerelease: false
+    - name: Upload Release Asset
+      uses: actions/upload-release-asset@v1
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        upload_url: ${{ steps.create_release.outputs.upload_url }}
+        asset_path: main-binary/main
+        asset_name: main
+        asset_content_type: application/octet-stream
